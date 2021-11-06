@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/static/js/main.99793394.chunk.js",
-    "main.js.map": "/static/js/main.99793394.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.cfff13e1.js",
-    "runtime-main.js.map": "/static/js/runtime-main.cfff13e1.js.map",
-    "static/js/2.bb578049.chunk.js": "/static/js/2.bb578049.chunk.js",
-    "static/js/2.bb578049.chunk.js.map": "/static/js/2.bb578049.chunk.js.map",
-    "static/js/3.095f6d4d.chunk.js": "/static/js/3.095f6d4d.chunk.js",
-    "static/js/3.095f6d4d.chunk.js.map": "/static/js/3.095f6d4d.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.bb578049.chunk.js.LICENSE.txt": "/static/js/2.bb578049.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/static/media/logo.6ce24c58.svg"
+    "main.css": "/starwiki/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/starwiki/static/js/main.99793394.chunk.js",
+    "main.js.map": "/starwiki/static/js/main.99793394.chunk.js.map",
+    "runtime-main.js": "/starwiki/static/js/runtime-main.6cff5a76.js",
+    "runtime-main.js.map": "/starwiki/static/js/runtime-main.6cff5a76.js.map",
+    "static/js/2.bb578049.chunk.js": "/starwiki/static/js/2.bb578049.chunk.js",
+    "static/js/2.bb578049.chunk.js.map": "/starwiki/static/js/2.bb578049.chunk.js.map",
+    "static/js/3.095f6d4d.chunk.js": "/starwiki/static/js/3.095f6d4d.chunk.js",
+    "static/js/3.095f6d4d.chunk.js.map": "/starwiki/static/js/3.095f6d4d.chunk.js.map",
+    "index.html": "/starwiki/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/starwiki/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.bb578049.chunk.js.LICENSE.txt": "/starwiki/static/js/2.bb578049.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/starwiki/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.cfff13e1.js",
+    "static/js/runtime-main.6cff5a76.js",
     "static/js/2.bb578049.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
     "static/js/main.99793394.chunk.js"
