@@ -5,8 +5,6 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 
-
-
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -29,7 +27,6 @@ interface IDescriptionModal {
 
 export default (props: IDescriptionModal) => {
     const { data, open, handleOpen, handleClose } = props
-    console.log(data)
 
     return (
         <div>

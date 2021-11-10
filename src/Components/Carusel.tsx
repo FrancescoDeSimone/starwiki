@@ -22,11 +22,11 @@ export default (props: ICarusel) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const filtering = (text: any) => {
-        setData(data.results.filter((d: any) => d[Object.keys(d)[0]].includes(text.target.value)))
+    const filtering = (event: any) => {
+        axios.get(`${props.url}?search=${event.target.value}`).then(resp => setData([resp.data]))
     }
     React.useEffect(() => {
-        axios.get(props.url).then(resp => setData(resp.data))
+        axios.get(props.url).then(resp => setData([resp.data]))
     }, [data])
 
     return data.results != undefined ?
