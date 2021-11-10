@@ -39,6 +39,8 @@ jobs:
       with:
         name: production-files
         path: ./build
+    env:
+      process.env.CI : false
   
   deploy:
     name: Deploy
