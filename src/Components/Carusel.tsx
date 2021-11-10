@@ -16,7 +16,7 @@ interface ICarusel {
 export default (props: ICarusel) => {
     // ddg.image_search({ query: "birds", moderate: true }).then(results => console.log(results))
 
-    const [data, setData] = React.useState<any>([{}]);
+    const [data, setData] = React.useState<any>({});
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -26,34 +26,31 @@ export default (props: ICarusel) => {
         setData(data.results.filter((d: any) => d[Object.keys(d)[0]].includes(text.target.value)))
     }
     React.useEffect(() => {
-        axios.get(props.url).then(resp => setData([...data, resp.data]))
-        console.log(data.forEach((e: any) => console.log(e)))
+        axios.get(props.url).then(resp => setData(resp.data))
     }, [data])
 
-    if (data.some((el: any) => el.results != undefined))
-        return (
+    return data.results != undefined ?
+        (
             <Box>
                 <TextField fullWidth id="standard-basic" label="Search..." variant="standard" onChange={filtering} />
                 <ImageList cols={4} gap={40} sx={{ margin: 10 }}>
-                    {data.forEach((element: any) => {
-                        element.results.map((item: any, index: number) => (
-                            <ImageListItem key={index.toString()} onClick={handleOpen}>
-                                <img
-                                    src="https://wallpapercave.com/wp/nHaLQDm.gif?w=248&fit=crop&auto=format"
-                                    srcSet="https://wallpapercave.com/wp/nHaLQDm.gif?w=248&fit=crop&auto=format&dpr=2 2x"
-                                    alt={item[Object.keys(item)[0]]}
-                                    loading="lazy"
-                                />
-                                <ImageListItemBar
-                                    title={item[Object.keys(item)[0]]}
-                                />
-                                <DescriptionModal data={item} open={open} handleOpen={handleOpen} handleClose={handleClose} />
-                            </ImageListItem>
-                        ))
-                    })
+                    {data.results.map((item: any, index: number) => (
+                        <ImageListItem key={index.toString()} onClick={handleOpen}>
+                            <img
+                                src="https://wallpapercave.com/wp/nHaLQDm.gif?w=248&fit=crop&auto=format"
+                                srcSet="https://wallpapercave.com/wp/nHaLQDm.gif?w=248&fit=crop&auto=format&dpr=2 2x"
+                                alt={item[Object.keys(item)[0]]}
+                                loading="lazy"
+                            />
+                            <ImageListItemBar
+                                title={item[Object.keys(item)[0]]}
+                            />
+                            <DescriptionModal data={item} open={open} handleOpen={handleOpen} handleClose={handleClose} />
+                        </ImageListItem>
+                    ))
                     }
                 </ImageList >
             </Box >
-        );
-    return null
+        ) :
+        null
 }

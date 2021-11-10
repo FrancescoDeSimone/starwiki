@@ -29,7 +29,7 @@ interface IDescriptionModal {
 
 export default (props: IDescriptionModal) => {
     const { data, open, handleOpen, handleClose } = props
-
+    console.log(data)
 
     return (
         <div>
@@ -47,10 +47,10 @@ export default (props: IDescriptionModal) => {
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Text in a modal
+                            {data[Object.keys(data)[0]]}
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                            {Object.keys(data).map((key: string) => <p>{key}:{data[key]}</p>)}
                         </Typography>
                     </Box>
                 </Fade>
