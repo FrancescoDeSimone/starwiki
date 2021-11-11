@@ -7,7 +7,6 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import TabPanel from './Components/TabPanel'
 import Carusel from './Components/Carusel'
-import axios from "axios"
 
 
 const a11yProps = (index: number) => {
@@ -23,7 +22,7 @@ export default () => {
     const [data, setData] = React.useState({});
 
     React.useEffect(() => {
-        axios.get("https://swapi.dev/api").then(resp => setData(resp.data))
+        fetch("https://swapi.dev/api").then(resp => resp.json()).then(data => setData(data))
     }, [data])
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {

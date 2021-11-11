@@ -2,37 +2,40 @@ import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import { Box } from '@mui/material';
 import DescriptionModal from './DescriptionModal';
 
-// import * as ddg from "duckduckgo-images-api"
+import * as ddg from "duckduckgo-images-api"
 
 interface ICarusel {
     url: string;
 }
 
 export default (props: ICarusel) => {
-    // ddg.image_search({ query: "birds", moderate: true }).then(results => console.log(results))
+    ddg.image_search({ query: "birds", moderate: true }).then(results => console.log(results))
 
-    const [data, setData] = React.useState<any>({});
+    const [data, setData] = React.useState<any>(null);
+    const [filter, setFilter] = React.useState<string>("");
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const filtering = (event: any) => {
-        axios.get(`${props.url}?search=${event.target.value}`).then(resp => setData(resp.data))
-    }
     React.useEffect(() => {
-        axios.get(props.url).then(resp => setData(resp.data))
-    }, [data])
+        const get_data = async () => {
+            let resp = await fetch(props.url + filter)
+            let data = await resp.json()
+            setData(data)
+        }
+        get_data()
 
-    return data.results != undefined ?
+    }, [filter])
+
+    return data != null ?
         (
             <Box>
-                <TextField fullWidth id="standard-basic" label="Search..." variant="standard" onChange={filtering} />
+                <TextField fullWidth id="standard-basic" label="Search..." variant="standard" onChange={(event) => setFilter(`?search=${event.target.value}`)} />
                 <ImageList cols={4} gap={40} sx={{ margin: 10 }}>
                     {data.results.map((item: any, index: number) => (
                         <ImageListItem key={index.toString()} onClick={handleOpen}>
@@ -52,5 +55,9 @@ export default (props: ICarusel) => {
                 </ImageList >
             </Box >
         ) :
-        null
+        (
+            <Box>
+                <TextField fullWidth id="standard-basic" label="Search..." variant="standard" onChange={(event) => setFilter(`?search=${event.target.value}`)} />
+            </Box >
+        )
 }
