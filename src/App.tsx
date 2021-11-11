@@ -9,6 +9,7 @@ import TabPanel from './Components/TabPanel'
 import Carusel from './Components/Carusel'
 import axios from "axios"
 
+
 const a11yProps = (index: number) => {
     return {
         id: `full-width-tab-${index}`,
@@ -45,7 +46,7 @@ export default () => {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    {appbar.map((data, index) => < Tab label={data} {...a11yProps(index)} />)}
+                    {appbar.map((data, index) => < Tab key={index} label={data} {...a11yProps(index)} />)}
                 </Tabs>
             </AppBar>
             <SwipeableViews
