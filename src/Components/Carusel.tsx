@@ -6,37 +6,60 @@ import TextField from '@mui/material/TextField';
 import { Box } from '@mui/material';
 import DescriptionModal from './DescriptionModal';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 interface ICarusel {
     url: string;
 }
-
 export default (props: ICarusel) => {
     const mobile = useMediaQuery('(max-width:800px)');
-    const [data, setData] = React.useState<any>(null);
+    const tablet = useMediaQuery('(max-width:1000px)');
+    const [data, setData] = React.useState<any>([]);
+    const [nextData, setNextData] = React.useState<any>(null);
     const [filter, setFilter] = React.useState<string>("");
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const fetchNextData =
+        (data: any) => fetch(data[data.length - 1].next)
+            .then(res => res.json())
+            .then(d => setNextData(d))
+
     React.useEffect(() => {
         const get_data = async () => {
             let resp = await fetch(props.url + filter)
-            let data = await resp.json()
-            setData(data)
+            let d = await resp.json()
+            setData([d])
+            if (window.visualViewport.width >= window.innerWidth) {
+                fetchNextData([d])
+            }
         }
         get_data()
-
     }, [filter])
 
-    return data != null ?
-        (
-            <Box>
-                <TextField sx={{ mb: 5 }} fullWidth id="standard-basic" label="Search..." variant="standard" onChange={(event) => setFilter(`?search=${event.target.value}`)} />
-                <ImageList cols={mobile ? 2 : 4} gap={mobile ? 2 : 10} sx={{ margin: mobile ? 0 : 10 }}>
-                    {data.results.map((item: any, index: number) => (
+    React.useEffect(() => {
+        console.log(nextData)
+        if (nextData != null)
+            setData([...data, nextData])
+
+    }, [nextData])
+
+    return (
+        <Box>
+            <TextField sx={{ mb: 5 }} fullWidth id="standard-basic" label="Search..." variant="standard" onChange={(event) => setFilter(`?search=${event.target.value}`)} />
+            <InfiniteScroll
+                dataLength={data.reduce((acc: number, d: any) => acc += d.count, 0)}
+                next={() => fetchNextData(data)}
+                hasMore={data.length > 0 && data[data.length - 1].next != null}
+                loader={""}
+                scrollableTarget="scrollableDiv"
+
+            >
+                <ImageList cols={tablet ? 3 : mobile ? 2 : 4} gap={mobile ? 2 : 10} sx={{ margin: mobile ? 0 : 10 }}>
+                    {data.map((element: any) => element.results.map((item: any, index: number) => (
                         <ImageListItem key={index.toString()} onClick={handleOpen}>
                             <img
                                 src="https://wallpapercave.com/wp/nHaLQDm.gif?w=248&fit=crop&auto=format"
@@ -49,14 +72,10 @@ export default (props: ICarusel) => {
                             />
                             <DescriptionModal data={item} open={open} handleOpen={handleOpen} handleClose={handleClose} />
                         </ImageListItem>
-                    ))
+                    )))
                     }
                 </ImageList >
-            </Box >
-        ) :
-        (
-            <Box>
-                <TextField fullWidth id="standard-basic" label="Search..." variant="standard" onChange={(event) => setFilter(`?search=${event.target.value}`)} />
-            </Box >
-        )
+            </InfiniteScroll>
+        </Box >
+    )
 }
