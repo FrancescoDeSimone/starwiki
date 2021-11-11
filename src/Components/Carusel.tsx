@@ -5,16 +5,15 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import TextField from '@mui/material/TextField';
 import { Box } from '@mui/material';
 import DescriptionModal from './DescriptionModal';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import * as ddg from "duckduckgo-images-api"
 
 interface ICarusel {
     url: string;
 }
 
 export default (props: ICarusel) => {
-    ddg.image_search({ query: "birds", moderate: true }).then(results => console.log(results))
-
+    const mobile = useMediaQuery('(max-width:800px)');
     const [data, setData] = React.useState<any>(null);
     const [filter, setFilter] = React.useState<string>("");
 
@@ -35,8 +34,8 @@ export default (props: ICarusel) => {
     return data != null ?
         (
             <Box>
-                <TextField fullWidth id="standard-basic" label="Search..." variant="standard" onChange={(event) => setFilter(`?search=${event.target.value}`)} />
-                <ImageList cols={4} gap={40} sx={{ margin: 10 }}>
+                <TextField sx={{ mb: 5 }} fullWidth id="standard-basic" label="Search..." variant="standard" onChange={(event) => setFilter(`?search=${event.target.value}`)} />
+                <ImageList cols={mobile ? 2 : 4} gap={mobile ? 2 : 10} sx={{ margin: mobile ? 0 : 10 }}>
                     {data.results.map((item: any, index: number) => (
                         <ImageListItem key={index.toString()} onClick={handleOpen}>
                             <img

@@ -47,7 +47,7 @@ export default (props: IDescriptionModal) => {
                             {data[Object.keys(data)[0]]}
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            {Object.keys(data).map((key: string) => <span>{key}:{data[key]}</span>)}
+                            {Object.keys(data).map((key: string) => <p>{key}:{data[key]}</p>)}
                         </Typography>
                     </Box>
                 </Fade>
