@@ -26,22 +26,21 @@ export default (props: ICarusel) => {
     const fetchNextData =
         (data: any) => fetch(data[data.length - 1].next)
             .then(res => res.json())
-            .then(d => setNextData(d))
+            .then(d => { setNextData(d); return d })
 
     React.useEffect(() => {
         const get_data = async () => {
             let resp = await fetch(props.url + filter)
             let d = await resp.json()
             setData([d])
-            if (window.visualViewport.width >= window.innerWidth) {
+            if (d.next && window.visualViewport.width >= window.innerWidth)
                 fetchNextData([d])
-            }
+                    .then(d => fetchNextData([d]))
         }
         get_data()
     }, [filter])
 
     React.useEffect(() => {
-        console.log(nextData)
         if (nextData != null)
             setData([...data, nextData])
 
