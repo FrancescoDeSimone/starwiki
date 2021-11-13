@@ -14,7 +14,8 @@ interface ICarusel {
     url: string;
 }
 export default (props: ICarusel) => {
-    const mobile = useMediaQuery('(max-width:800px)');
+    const mobile = useMediaQuery('(max-width:450px)');
+    const phablet = useMediaQuery('(max-width:700px)');
     const tablet = useMediaQuery('(max-width:1000px)');
     const [data, setData] = React.useState<any>([]);
     const [nextData, setNextData] = React.useState<any>(null);
@@ -72,7 +73,7 @@ export default (props: ICarusel) => {
                 scrollableTarget="scrollableDiv"
 
             >
-                <ImageList cols={tablet ? 3 : mobile ? 2 : 4} gap={mobile ? 2 : 10} sx={{ margin: mobile ? 0 : 10 }}>
+                <ImageList cols={mobile? 1 : phablet ? 2 : tablet ? 3 : 4} gap={mobile ? 2 : 10} sx={{ margin: mobile ? 0 : 10 }}>
                     {data.map((element: any) => element.results.map((item: any, index: number) => (
                         <ImageListItem key={index.toString()} onClick={() => goTo(item)}>
                             <img

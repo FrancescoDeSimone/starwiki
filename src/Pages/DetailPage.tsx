@@ -41,7 +41,7 @@ export default () => {
                 }}>
                     {Object.keys(state).map((key: string) =>
                         <p>
-                            <span style={{ fontWeight: 'bold' }}>{key}: </span> {printVal(state[key])}
+                            <span style={{ fontWeight: 'bold' }}>{key.replaceAll("_", " ")}: </span> {printVal(state[key])}
                         </p>
                     )
                     }

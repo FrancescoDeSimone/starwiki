@@ -1,4 +1,3 @@
-import * as React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -8,6 +7,7 @@ import Box from '@mui/material/Box';
 import TabPanel from '../Components/TabPanel'
 import Carusel from '../Components/Carusel'
 import { Toolbar, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const allProps = (index: number) => {
     return {
@@ -18,10 +18,10 @@ const allProps = (index: number) => {
 
 export default () => {
     const theme = useTheme();
-    const [value, setValue] = React.useState(0);
-    const [data, setData] = React.useState({});
+    const [value, setValue] = useState(0);
+    const [data, setData] = useState({});
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetch("https://swapi.dev/api").then(resp => resp.json()).then(data => setData(data))
     }, [data])
 
