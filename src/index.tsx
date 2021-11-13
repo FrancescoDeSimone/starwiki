@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 
 
-console.log(process.env.PUBLIC_URL)
 ReactDOM.render(
     <React.StrictMode>
         <Router >

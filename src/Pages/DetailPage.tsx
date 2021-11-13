@@ -6,7 +6,6 @@ import isURL from '../utils';
 
 
 const printVal = (item: any) => {
-    console.log(item, typeof item)
     if (!Array.isArray(item))
         return item
     const text = item.reduce((res: string, el: any) => res += el[0][Object.keys(el[0])[0]] + " ,", "")

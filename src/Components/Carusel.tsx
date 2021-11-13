@@ -37,7 +37,6 @@ export default (props: ICarusel) => {
                 .map((el: any) => fetch(el)
                     .then((res: any) => res.json()).then((c: any) => {
                         toSend[k] = [...toSend[k], [c]]
-                        console.log(toSend)
                     }).then(() => navigate('/detail', { state: toSend })
                     ))
         }
@@ -73,7 +72,7 @@ export default (props: ICarusel) => {
                 scrollableTarget="scrollableDiv"
 
             >
-                <ImageList cols={mobile? 1 : phablet ? 2 : tablet ? 3 : 4} gap={mobile ? 2 : 10} sx={{ margin: mobile ? 0 : 10 }}>
+                <ImageList cols={mobile ? 1 : phablet ? 2 : tablet ? 3 : 4} gap={mobile ? 2 : 10} sx={{ margin: mobile ? 0 : 10 }}>
                     {data.map((element: any) => element.results.map((item: any, index: number) => (
                         <ImageListItem key={index.toString()} onClick={() => goTo(item)}>
                             <img
