@@ -8,9 +8,10 @@ import {
 } from "react-router-dom";
 
 
+console.log(process.env.PUBLIC_URL)
 ReactDOM.render(
     <React.StrictMode>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <App />
         </Router>
 
