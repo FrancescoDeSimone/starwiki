@@ -10,7 +10,7 @@ import {
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router >
+        <Router basename="/starwiki">
             <App />
         </Router>
 
