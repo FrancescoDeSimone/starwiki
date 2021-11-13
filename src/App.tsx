@@ -17,16 +17,15 @@ export default () => {
     console.log(sessionStorage.getItem('token'))
     return sessionStorage.getItem('token') == null ?
         useRoutes([
-            { path: "signup", element: <SignUp /> },
-            { path: "login", element: <Login /> },
-            { path: "/", element: <Login /> },
-            { path: "*", element: <Login /> },
+            { path: "/starwiki/signup", element: <SignUp /> },
+            { path: "/starwiki/login", element: <Login /> },
+            { path: "/starwiki/", element: <Login /> },
         ]) :
         useRoutes([
-            { path: "signup", element: <SignUp /> },
-            { path: "login", element: <Login /> },
-            { path: "starwiki", element: <Main /> },
-            { path: "detail", element: <DetailPage /> },
-            { path: "/", element: <Main /> },
+            { path: "/starwiki/signup", element: <SignUp /> },
+            { path: "/starwiki/login", element: <Login /> },
+            { path: "/starwiki/starwiki", element: <Main /> },
+            { path: "/starwiki/detail", element: <DetailPage /> },
+            { path: "/starwiki/", element: <Main /> },
         ]);
 }
