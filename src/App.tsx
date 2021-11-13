@@ -20,6 +20,7 @@ export default () => {
             { path: "signup", element: <SignUp /> },
             { path: "login", element: <Login /> },
             { path: "/", element: <Login /> },
+            { path: "*", element: <Login /> },
         ]) :
         useRoutes([
             { path: "signup", element: <SignUp /> },
@@ -27,5 +28,6 @@ export default () => {
             { path: "/", element: <Main /> },
             { path: "starwiki", element: <Main /> },
             { path: "detail", element: <DetailPage /> },
+            { path: "*", element: <Main /> },
         ]);
 }
