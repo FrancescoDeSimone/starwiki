@@ -4,9 +4,10 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import TextField from '@mui/material/TextField';
 import { Box } from '@mui/material';
-import DescriptionModal from './DescriptionModal';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useNavigate } from 'react-router-dom';
+import isURL from '../utils';
 
 
 interface ICarusel {
@@ -19,14 +20,28 @@ export default (props: ICarusel) => {
     const [nextData, setNextData] = React.useState<any>(null);
     const [filter, setFilter] = React.useState<string>("");
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
     const fetchNextData =
         (data: any) => fetch(data[data.length - 1].next)
             .then(res => res.json())
             .then(d => { setNextData(d); return d })
+
+    const navigate = useNavigate()
+
+    const goTo = (data: any) => {
+        let toSend = { ...data }
+        let keys = Object.keys(data).filter((key: any) => isURL(data[key]))
+        keys.forEach(k => toSend[k] = [])
+        keys.forEach((k: any) => {
+            data[k].toString().split(",")
+                .map((el: any) => fetch(el)
+                    .then((res: any) => res.json()).then((c: any) => {
+                        toSend[k] = [...toSend[k], [c]]
+                        console.log(toSend)
+                    }).then(() => navigate('/detail', { state: toSend })
+                    ))
+        }
+        )
+    }
 
     React.useEffect(() => {
         const get_data = async () => {
@@ -59,7 +74,7 @@ export default (props: ICarusel) => {
             >
                 <ImageList cols={tablet ? 3 : mobile ? 2 : 4} gap={mobile ? 2 : 10} sx={{ margin: mobile ? 0 : 10 }}>
                     {data.map((element: any) => element.results.map((item: any, index: number) => (
-                        <ImageListItem key={index.toString()} onClick={handleOpen}>
+                        <ImageListItem key={index.toString()} onClick={() => goTo(item)}>
                             <img
                                 src="https://wallpapercave.com/wp/nHaLQDm.gif?w=248&fit=crop&auto=format"
                                 srcSet="https://wallpapercave.com/wp/nHaLQDm.gif?w=248&fit=crop&auto=format&dpr=2 2x"
@@ -69,7 +84,6 @@ export default (props: ICarusel) => {
                             <ImageListItemBar
                                 title={item[Object.keys(item)[0]]}
                             />
-                            <DescriptionModal data={item} open={open} handleOpen={handleOpen} handleClose={handleClose} />
                         </ImageListItem>
                     )))
                     }
