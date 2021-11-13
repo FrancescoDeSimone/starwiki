@@ -1,8 +1,5 @@
 import { useState } from "react";
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
     useRoutes,
     useNavigate,
 } from "react-router-dom";
