@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/starwiki/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/starwiki/static/js/main.812ff017.chunk.js",
-    "main.js.map": "/starwiki/static/js/main.812ff017.chunk.js.map",
+    "main.js": "/starwiki/static/js/main.a9112799.chunk.js",
+    "main.js.map": "/starwiki/static/js/main.a9112799.chunk.js.map",
     "runtime-main.js": "/starwiki/static/js/runtime-main.3b249e80.js",
     "runtime-main.js.map": "/starwiki/static/js/runtime-main.3b249e80.js.map",
     "static/js/2.707e8fe7.chunk.js": "/starwiki/static/js/2.707e8fe7.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.3b249e80.js",
     "static/js/2.707e8fe7.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.812ff017.chunk.js"
+    "static/js/main.a9112799.chunk.js"
   ]
 }
