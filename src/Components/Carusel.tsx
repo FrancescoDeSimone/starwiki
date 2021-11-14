@@ -29,18 +29,23 @@ export default (props: ICarusel) => {
     const navigate = useNavigate()
 
     const goTo = (data: any) => {
-        let toSend = { ...data }
-        let keys = Object.keys(data).filter((key: any) => isURL(data[key]))
-        keys.forEach(k => toSend[k] = [])
-        keys.forEach((k: any) => {
-            data[k].toString().split(",")
-                .map((el: any) => fetch(el)
-                    .then((res: any) => res.json()).then((c: any) => {
-                        toSend[k] = [...toSend[k], [c]]
-                    }).then(() => navigate('/detail', { state: toSend, replace: true })
-                    ))
+        const fetchInnerData = async () => {
+            let toSend = { ...data }
+            let keys = Object.keys(data).filter((key: any) => isURL(data[key]))
+            keys.forEach(k => toSend[k] = [])
+            for (let k of keys) {
+                let allUrl = data[k].toString().split(",")
+                let fetched: any = []
+                fetched = [...fetched, await allUrl.map(async (el: any) => {
+                    let res = await fetch(el)
+                    let cont = await res.json()
+                    return cont;
+                })]
+                toSend[k] = await Promise.all(fetched.flat())
+            }
+            return new Promise((res, rej) => res(toSend))
         }
-        )
+        fetchInnerData().then((obj: any) => navigate('/detail', { state: obj }))
     }
 
     React.useEffect(() => {

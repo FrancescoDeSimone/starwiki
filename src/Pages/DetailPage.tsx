@@ -6,16 +6,16 @@ import isURL from '../utils';
 
 
 const printVal = (item: any) => {
-    if (!Array.isArray(item))
+    if (typeof item != "object")
         return item
-    const text = item.reduce((res: string, el: any) => res += el[0][Object.keys(el[0])[0]] + " ,", "")
+    const text = item.reduce((res: string, el: any) => res += el[Object.keys(el)[0]] + " ,", "")
     return text.slice(0, -1)
 }
 
 export default () => {
     const { state } = useLocation();
-
-    [...Object.keys(state).filter((key: string) => state[key] == ""),
+    console.log(state);
+    let _ = [...Object.keys(state).filter((key: string) => state[key] == ""),
         "url",
         "created",
         "edited"].forEach((k: string) => delete state[k]) //remove all data missing or not userfull 
