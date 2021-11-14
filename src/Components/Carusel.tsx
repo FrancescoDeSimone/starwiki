@@ -37,7 +37,7 @@ export default (props: ICarusel) => {
                 .map((el: any) => fetch(el)
                     .then((res: any) => res.json()).then((c: any) => {
                         toSend[k] = [...toSend[k], [c]]
-                    }).then(() => navigate('/detail', { state: toSend })
+                    }).then(() => navigate('/detail', { state: toSend, replace: true })
                     ))
         }
         )
