@@ -6,8 +6,9 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import TabPanel from '../Components/TabPanel'
 import Carusel from '../Components/Carusel'
-import { Toolbar, Typography } from '@mui/material';
+import { Button, Toolbar, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const allProps = (index: number) => {
     return {
@@ -32,6 +33,12 @@ export default () => {
     const handleChangeIndex = (index: number) => {
         setValue(index);
     };
+    const navigate = useNavigate()
+    const logout = () => {
+        sessionStorage.setItem('token', "")
+        navigate("login")
+
+    }
     const appbar: string[] = Object.keys(data)
     const content: string[] = Object.values(data)
     return (
@@ -42,7 +49,9 @@ export default () => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         StarWiki
                     </Typography>
+                    <Button color="inherit" onClick={logout}>Log Out</Button>
                 </Toolbar>
+
             </AppBar>
             <AppBar position="static">
                 <Tabs

@@ -11,7 +11,7 @@ import SignUp from "./Pages/SignUp";
 
 export default () => {
     const navigate = useNavigate()
-    return sessionStorage.getItem('token') == null ?
+    return sessionStorage.getItem('token') == "" ?
         useRoutes([
             { path: "/signup", element: <SignUp /> },
             { path: "/login", element: <Login /> },

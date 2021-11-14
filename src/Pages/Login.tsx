@@ -11,10 +11,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+import { Alert } from '@mui/material';
+
+
 
 const theme = createTheme();
 
 export default () => {
+    const [open, setOpen] = React.useState(false);
+
     const navigate = useNavigate()
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -24,8 +30,18 @@ export default () => {
         if (data.get('email') == email && data.get('password') == password) {
             sessionStorage.setItem('token', "123token")
             navigate('/starwiki')
+        } else {
+            setOpen(true);
         }
 
+    };
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
     };
 
     return (
@@ -46,7 +62,7 @@ export default () => {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
@@ -84,7 +100,18 @@ export default () => {
                         </Grid>
                     </Box>
                 </Box>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    open={open}
+                    autoHideDuration={6000} onClose={handleClose}
+                >
+                    <Alert severity="error">Account not found, please sign up!</Alert>
+
+                </Snackbar>
             </Container>
-        </ThemeProvider>
+        </ThemeProvider >
     );
 }
