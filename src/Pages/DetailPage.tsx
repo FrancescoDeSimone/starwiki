@@ -24,7 +24,7 @@ export default () => {
         <React.Fragment>
             <AppBar position="static">
                 <Toolbar>
-                    <Link href="/starwiki" style={{
+                    <Link href="/#/starwiki" style={{
                         color: 'white'
                     }}><ArrowBack></ArrowBack></Link>
 

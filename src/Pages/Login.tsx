@@ -25,9 +25,9 @@ export default () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const email = sessionStorage.getItem('email');
+        const username = sessionStorage.getItem('username');
         const password = sessionStorage.getItem('password');
-        if (data.get('email') == email && data.get('password') == password) {
+        if (data.get('username') == username && data.get('password') == password) {
             sessionStorage.setItem('token', "123token")
             navigate('/starwiki')
         } else {
@@ -67,10 +67,10 @@ export default () => {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="username"
+                            label="username"
+                            name="username"
+                            autoComplete="username"
                             autoFocus
                         />
                         <TextField
@@ -93,7 +93,7 @@ export default () => {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link href="/signup" variant="body2">
+                                <Link href="/#/signup" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
@@ -108,7 +108,7 @@ export default () => {
                     open={open}
                     autoHideDuration={6000} onClose={handleClose}
                 >
-                    <Alert severity="error">Account not found, please sign up!</Alert>
+                    <Alert severity="error">Account not found, please sign up</Alert>
 
                 </Snackbar>
             </Container>

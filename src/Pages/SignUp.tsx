@@ -20,7 +20,7 @@ export default () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        sessionStorage.setItem('email', JSON.stringify(data.get('email')).slice(1, -1));
+        sessionStorage.setItem('username', JSON.stringify(data.get('username')).slice(1, -1));
         sessionStorage.setItem('password', JSON.stringify(data.get('password')).slice(1, -1));
         navigate("/login")
     };
@@ -49,10 +49,10 @@ export default () => {
                                 <TextField
                                     required
                                     fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
+                                    id="username"
+                                    label="username"
+                                    name="username"
+                                    autoComplete="username"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -77,7 +77,7 @@ export default () => {
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="/login" variant="body2">
+                                <Link href="/#/login" variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
